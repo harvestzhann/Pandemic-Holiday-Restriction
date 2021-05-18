@@ -37,7 +37,7 @@ def isAllowed(numplate, destination):
 
    regionCodeAccess = regcode.AccessControl()
 
-   regionCode = regionCodeAccess.show(f"Wilayah LIKE '%{destination[1]}%'", 'Kode_Wilayah, Subkode')   # Getting region code from destination
+   regionCode = regionCodeAccess.show(f"Region LIKE '%{destination[1]}%'", 'Region_Code, Subcode')   # Getting region code from destination
 
    if len(regionCode) > 1:
       return output['compound reference']  # Many region has that word
