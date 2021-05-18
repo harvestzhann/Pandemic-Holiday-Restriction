@@ -21,10 +21,10 @@ def validestination(destination):
 def isAllowed(numplate, destination):
    "Check whether vehicle is allowed"
    output = {
-      'allowed' : 1,
-      'not allowed' : 0,
-      'not found' : -1,
-      'compound reference' : -2
+      'allowed' : 1, # vehicle is allowed to got to 'destination'
+      'not allowed': 0,   # vehicle not allowed to got to 'destination'
+      'not found': -1,  # 'destination' has no match to any region names
+      'compound reference': -2  # 'destination' refering to many region names
    }
 
    destination = validestination(destination)
@@ -33,7 +33,7 @@ def isAllowed(numplate, destination):
       return output['compound reference']
 
    numplateFrontCode = numplate.split()[0]
-   numplateBackCode = numplate.split()[-1]
+   numplateBackCode = numplate.split()[-1][0]
 
    regionCodeAccess = regcode.AccessControl()
 
