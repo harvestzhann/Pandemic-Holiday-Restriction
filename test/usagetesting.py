@@ -62,6 +62,8 @@ def main():
          print("Allowed")
       elif isAllowed(numplate, destination) == 0:
          print("Not Allowed")
+      elif isAllowed(numplate, destination) == -1:
+         print("Not Found")
       else:
          print(f"'{destination.capitalize()}' refers to many region")
 
