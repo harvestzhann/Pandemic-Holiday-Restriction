@@ -56,6 +56,9 @@ def main():
    numplate = "B 1976 FKJ" 
    print(numplate)
 
+   # TODO: Make information for what region can 'numplate' go
+   access = regcode.AccessControl()
+
    while True:
       destination = input("Your destination: ")
       if isAllowed(numplate, destination) == 1:
