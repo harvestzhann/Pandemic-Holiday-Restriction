@@ -28,6 +28,29 @@ def isAllowed(numplate, destination):
    }
 
    # TODO: Continue the function
+   destination = validestination(destination)
+
+   if not destination[0]:
+      return output['compound reference']
+
+   numplateFrontCode = numplate.split()[0]
+   numplateBackCode = numplate.split()[-1]
+
+   regionCodeAccess = regcode.AccessControl()
+
+   regionCode = regionCodeAccess.show(f"Wilayah LIKE '%{destination[1]}%'", 'Kode_Wilayah, Subkode')   # Getting region code from destination
+
+   if len(regionCode) > 1:
+      return output['compound reference']  # Many region has that word
+   elif len(regionCode) == 0:
+      return output['not found']
+   
+   regionFrontCode = [i[0] for i in regionCode]
+   regionBackCode = [i[1] for i in regionCode]
+
+   if numplateFrontCode in regionFrontCode and numplateBackCode in regionBackCode:
+      return output['allowed']
+   return output['not allowed']
 
 
 def main():
