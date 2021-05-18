@@ -17,25 +17,25 @@ class AccessControl:
    def __del__(self):
       self.__connector.close()
 
-   def show_all(self, tablename: str):
+   def show_all(self, tablename: str = TABLENAME):
       "Show all datas"
       self.__curs.execute(f"SELECT * FROM {tablename}")
       return self.__curs.fetchall()
 
-   def show(self, tablename: str, condition: str, todisplay: str = '*'):
+   def show(self, condition: str, todisplay: str, tablename: str = TABLENAME):
       "Display specific data"
       self.__curs.execute(f"SELECT {todisplay} FROM {tablename} WHERE {condition}")
       return self.__curs.fetchall()
 
-   def insert(self, tablename: str, data: tuple):
+   def insert(self, data: tuple, tablename: str = TABLENAME):
       "Insert data"
       self.__curs.execute(f"INSERT INTO {tablename}(Wilayah, Kode_Wilayah, Subkode) VALUES(?, ?, ?)", (data))
 
-   def update(self, tablename: str, data: tuple, condition: str):
+   def update(self, data: tuple, condition: str, tablename: str = TABLENAME):
       "Update data"
       self.__curs.execute("UPDATE {0} SET Wilayah=?, Kode_Wilayah=?, Subkode=? WHERE {1}".format(tablename, condition), data)
 
-   def delete(self, tablename: str, condition: str):
+   def delete(self, condition: str, tablename: str = TABLENAME):
       "Delete data"
       self.__curs.execute("DELETE FROM {0} WHERE {1}".format(tablename, condition))
 
