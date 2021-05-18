@@ -27,7 +27,6 @@ def isAllowed(numplate, destination):
       'compound reference' : -2
    }
 
-   # TODO: Continue the function
    destination = validestination(destination)
 
    if not destination[0]:
