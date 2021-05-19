@@ -56,8 +56,14 @@ def main():
    numplate = "B 1976 FKJ" 
    print(numplate)
 
-   # TODO: Make information for what region can 'numplate' go
+   print("\n\nExample")
+
    access = regcode.AccessControl()
+   allowed = access.show(f"Region_Code = '{numplate.split()[0]}' AND Subcode LIKE '%{numplate.split()[-1][0]}%'", 'Region')
+   print("Your destination:", allowed[0][0], "-> Allowed")
+
+   print()
+   print()
 
    while True:
       destination = input("Your destination: ")
