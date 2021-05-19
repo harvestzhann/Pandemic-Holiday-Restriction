@@ -81,6 +81,6 @@ def INSET_DEFAULT_RECORDS():
 
 if __name__ == "__main__":
    # TODO Create table for the first time
-   print("Creating a test table: ", end='')
-   CREATE_DEFAULT_TABLE()
-   INSET_DEFAULT_RECORDS()
+   # CREATE_DEFAULT_TABLE()
+   # INSET_DEFAULT_RECORDS()
+   pass
