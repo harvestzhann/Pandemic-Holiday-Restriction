@@ -2,7 +2,7 @@
 import sqlite3
 
 
-DATABASENAME = r"databases\number-plate-codes.db"
+DATABASENAME = r"database\number-plate-codes.db"
 TABLENAME = "number_plate_codes"
 
 INVALID_DESTINATION = {'Kota', 'Kabupaten', 'Administrasi', 'Sebagian', 'Utara', 'Selatan', 'Timur', 'Barat', 'Pusat'}  # Words that are not refering to a region
