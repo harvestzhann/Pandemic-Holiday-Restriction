@@ -1,45 +1,59 @@
 import sqlite3
 
 
-def CREATETABLE(dbname:str, tablename:str, sqlcommand:str):
+dbname = r"database\number-plate-codes.db"
+tablename = "number_plate_codes"
+
+
+def CREATETABLE(dbname:str, sqlcommand:str):
    with sqlite3.connect(dbname, isolation_level=None) as conn:
       curs = conn.cursor()
-      try:
-         curs.execute(sqlcommand)
-         print(f"Creating '{tablename}' is done")
-      except sqlite3.OperationalError:
-         print(f"Table '{tablename}' already exists")
+      curs.execute(sqlcommand)
 
 
 def CREATE_DEFAULT_TABLE():
    "Creating default table for the first time"
-   dbname = r"databases\number-plate-codes.db"
-   tablename = "number_plate_codes"
    sqlcommand = str(
       f"""
-         CREATE TABLE number_plate_codes (
+         CREATE TABLE {tablename} (
             `Region` TEXT,
             `Region_Code` TEXT,
             `Subcode` TEXT
          );
       """
    )
-   CREATETABLE(dbname, tablename, sqlcommand)
+   CREATETABLE(dbname, sqlcommand)
 
 
 def INSET_DEFAULT_RECORDS():
    "Creating default table for the first time"
-   dbname = r"databases\number-plate-codes.db"
-   tablename = "number_plate_codes"
    sqlcommand = str(
       f"""
-         INSERT INTO number_plate_codes(Region, Region_Code, Subcode) VALUES 
+         INSERT INTO {tablename} VALUES
             ('Kota Serang','A','A, B, C, D'),
             ('Kabupaten Serang','A','E, F, G, H, I'),
             ('Kabupaten Pandeglang','A','J, K, L, M, N'),
             ('Kota Cilegon','A','O, U'),
             ('Kabupaten Lebak','A','P, R, S, T'),
             ('Kabupaten Tangerang','A','V, W, X, Y, Z'),
+            ('Kota Magelang','AA','A, H, S, U'),
+            ('Kabupaten Magelang','AA','B, G, K, O, T'),
+            ('Kabupaten Purworejo','AA','C, L, Q, V'),
+            ('KabupatenKebumen','AA','D, J, M, W'),
+            ('Kabupaten Temanggung','AA','E, N, Y'),
+            ('Kabupaten Wonosobo','AA','F, P, Z'),
+            ('Kota Yogyakarta','AB','A, F, H, I, S'),
+            ('Kabupaten Bantul','AB','B, G, J, K, T'),
+            ('KabupatenKulon Progo','AB','C, L, P, V'),
+            ('Kabupaten GunungKidul','AB','D, M, W'),
+            ('Kabupaten Sleman','AB','E, N, Q, U, Y, Z'),
+            ('Kota Surakarta','AD','A, H, S, U'),
+            ('Kabupaten Sukoharjo','AD','B, K, O, T'),
+            ('KabupatenKlaten','AD','C, L, J, Q, V'),
+            ('Kabupaten Boyolali','AD','D, M, W'),
+            ('Kabupaten Sragen','AD','E, N, Y'),
+            ('KabupatenKaranganyar','AD','F, P, Z'),
+            ('Kabupaten Wonogiri','AD','G, I, R'),
             ('Kota Administrasi Jakarta Barat','B','B'),
             ('Kota Tangerang','B','C, V'),
             ('Kota Depok','B','E, Z'),
@@ -50,6 +64,159 @@ def INSET_DEFAULT_RECORDS():
             ('Kota Administrasi Jakarta Timur','B','T'),
             ('Kota Administrasi Jakarta Utara','B','U'),
             ('Kota Tangerang Selatan','B','W'),
+            ('Kota Padang','BA','A, B, O, Q, R'),
+            ('Kabupaten Lima PuluhKota','BA','C, X'),
+            ('Kabupaten Pasaman','BA','D'),
+            ('Kabupaten Tanah Datar','BA','E'),
+            ('Kabupaten Padang Pariaman','BA','F'),
+            ('Kabupaten Pesisir Selatan','BA','G, I'),
+            ('Kabupaten Solok','BA','H'),
+            ('Kota Sawahlunto','BA','J'),
+            ('Kabupaten Sijunjung','BA','K'),
+            ('Kota Bukittinggi','BA','L'),
+            ('Kota Payakumbuh','BA','M'),
+            ('Kota Padang Panjang','BA','N'),
+            ('Kota Solok','BA','P'),
+            ('Kabupaten Pasaman Barat','BA','S'),
+            ('Kabupaten Agam','BA','T, Z'),
+            ('KabupatenKepulauan Mentawai','BA','U'),
+            ('Kabupaten Dharmasraya','BA','V'),
+            ('Kota Pariaman','BA','W'),
+            ('Kabupaten Solok Selatan','BA','Y'),
+            ('Kota Sibolga','BB','A, L, M'),
+            ('Kabupaten Tapanuli Utara','BB','B'),
+            ('Kabupaten Samosir','BB','C'),
+            ('Kabupaten Humbang Hasundutan','BB','D'),
+            ('Kabupaten Toba Samosir','BB','E'),
+            ('Kota Padang Sidempuan','BB','F, H'),
+            ('Kabupaten Tapanuli Selatan','BB','G'),
+            ('Kabupaten Padang Lawas','BB','J'),
+            ('Kabupaten Padang Lawas Utara','BB','K'),
+            ('Kabupaten Tapanuli Tengah','BB','N'),
+            ('Kabupaten Nias Utara','BB','Q'),
+            ('Kabupaten Mandailing Natal','BB','R'),
+            ('Kota Gunungsitoli','BB','T'),
+            ('Kabupaten Nias Barat','BB','U'),
+            ('Kabupaten Nias','BB','V'),
+            ('Kabupaten Nias Selatan','BB','W'),
+            ('Kabupaten Dairi','BB','Y'),
+            ('Kabupaten Pakpak Bharat','BB','Z'),
+            ('Kota Bengkulu','BD','A, C, E, L'),
+            ('Kabupaten Bengkulu Selatan','BD','B, M'),
+            ('Kabupaten Bengkulu Utara','BD','D, S'),
+            ('KabupatenKepahiang','BD','G'),
+            ('Kabupaten Lebong','BD','H'),
+            ('Kabupaten Rejang Lebong','BD','K'),
+            ('Kabupaten Muko Muko','BD','N'),
+            ('Kabupaten Seluma','BD','P'),
+            ('KabupatenKaur','BD','W'),
+            ('Kabupaten Bengkulu Tengah','BD','Y'),
+            ('Kota Bandar Lampung','BE','A, B, X, C, Y'),
+            ('Kabupaten Lampung Selatan','BE','D, E, O'),
+            ('Kota Metro','BE','F'),
+            ('Kabupaten Lampung Tengah','BE','G, H, I'),
+            ('Kabupaten Lampung Utara','BE','J, K'),
+            ('Kabupaten Mesuji','BE','L'),
+            ('Kabupaten Lampung Barat','BE','M'),
+            ('Kabupaten Lampung Timur','BE','N, P'),
+            ('Kabupaten Tulang Bawang Barat','BE','Q'),
+            ('Kabupaten Pesawaran','BE','R'),
+            ('Kabupaten Tulang Bawang','BE','S, T'),
+            ('Kabupaten Tanggamus','BE','V, Z'),
+            ('Kabupaten Pringsewu','BE','U'),
+            ('Kabupaten WayKanan','BE','W'),
+            ('Kabupaten Pesisir Barat','BE','X'),
+            ('Kota Palembang','BG','A, I, L, M, N, P, Q, R, U, X, Z'),
+            ('Kabupaten Musi Banyuasin','BG','B'),
+            ('Kota Prabumulih','BG','C'),
+            ('Kabupaten Muara Enim','BG','D'),
+            ('Kabupaten Lahat','BG','E'),
+            ('Kabupaten OganKomering Ulu','BG','F'),
+            ('Kabupaten Musi Rawas','BG','G'),
+            ('Kota Lubuk Linggau','BG','H'),
+            ('Kabupaten Banyuasin','BG','J'),
+            ('Kabupaten OganKomering Ilir','BG','K'),
+            ('Kabupaten Penukal Abab Lematang Ilir','BG','O'),
+            ('Kabupaten Empat Lawang','BG','S'),
+            ('Kabupaten Ogan Ilir','BG','T'),
+            ('Kabupaten OganKomering Ulu Selatan','BG','V'),
+            ('Kota Pagaralam','BG','W'),
+            ('Kabupaten OganKomering Ulu Timur','BG','Y'),
+            ('Kota Jambi','BH','A,  L, M, N, Y, Z'),
+            ('Kabupaten Batanghari','BH','B, V'),
+            ('Kabupaten Tebo','BH','C, W'),
+            ('KabupatenKerinci','BH','D'),
+            ('Kabupaten Tanjung Jabung Barat','BH','E'),
+            ('Kabupaten Merangin','BH','F, P'),
+            ('Kabupaten Muaro Jambi','BH','G, H'),
+            ('Kabupaten Bungo','BH','K, U'),
+            ('Kota Sungai Penuh','BH','R'),
+            ('Kabupaten Sarolangun','BH','Q, S'),
+            ('Kabupaten Tanjung Jabung Timur','BH','T'),
+            ('Kota Medan','BK','A, B, C, D, E, F, G, H, I, K, L'),
+            ('Kabupaten Labuhanbatu Utara','BK','J'),
+            ('Kabupaten Deli Serdang','BK','M'),
+            ('Kota Tebing Tinggi','BK','N'),
+            ('Kabupaten Batubara','BK','O'),
+            ('Kabupaten Langkat','BK','P'),
+            ('Kota Tanjung Balai','BK','Q'),
+            ('Kota Binjai','BK','R'),
+            ('KabupatenKaro','BK','S'),
+            ('Kabupaten Simalungun','BK','T, U'),
+            ('Kabupaten Asahan','BK','V'),
+            ('Kota Pematang Siantar','BK','W'),
+            ('Kabupaten Serdang Bedagai','BK','X'),
+            ('Kabupaten Labuhanbatu','BK','Y'),
+            ('Kabupaten Labuhanbatu Selatan','BK','Z'),
+            ('Kota Banda Aceh','BL','A, J, L'),
+            ('Kabupaten Aceh Besar','BL','B'),
+            ('Kabupaten Aceh Barat Daya','BL','C'),
+            ('Kabupaten Aceh Timur','BL','D'),
+            ('Kabupaten Aceh Barat','BL','E'),
+            ('Kota Langsa','BL','F'),
+            ('Kabupaten Aceh Tengah','BL','G'),
+            ('Kabupaten Gayo Lues','BL','H'),
+            ('Kota Subulussalam','BL','I'),
+            ('Kabupaten Aceh Utara','BL','K, Q'),
+            ('Kota Sabang','BL','M'),
+            ('Kota Lhokseumawe','BL','N'),
+            ('Kabupaten Pidie Jaya','BL','O'),
+            ('Kabupaten Pidie','BL','P'),
+            ('Kabupaten Aceh Singkil','BL','R'),
+            ('Kabupaten Simeulue','BL','S'),
+            ('Kabupaten Aceh Selatan','BL','T'),
+            ('Kabupaten Aceh Tamiang','BL','U'),
+            ('Kabupaten Nagan Raya','BL','V'),
+            ('Kabupaten Aceh Jaya','BL','W'),
+            ('Kabupaten Aceh Tenggara','BL','X'),
+            ('Kabupaten Bener Meriah','BL','Y'),
+            ('Kabupaten Bireuen','BL','Z'),
+            ('Kota Pekanbaru','BM','A, J, L, N, Q, T'),
+            ('Kabupaten Indragiri Hulu','BM','B, V'),
+            ('Kabupaten Pelalawan','BM','C, I'),
+            ('Kabupaten Bengkalis','BM','D, E'),
+            ('KabupatenKampar','BM','F, O, Z'),
+            ('Kabupaten Indragiri Hilir','BM','G'),
+            ('Kota Dumai','BM','H, R'),
+            ('KabupatenKuantan Singingi','BM','K, X'),
+            ('Kabupaten Rokan Hulu','BM','M, U'),
+            ('Kabupaten Rokan Hilir','BM','P, W'),
+            ('Kabupaten Siak','BM','S, Y'),
+            ('KabupatenKepulauan Meranti','BM','X'),
+            ('Kabupaten Belitung Timur','BN','G'),
+            ('Kota Pangkal Pinang','BN','A'),
+            ('Kabupaten Bangka','BN','B'),
+            ('Kabupaten Bangka Tengah','BN','C'),
+            ('Kabupaten Bangka Barat','BN','D'),
+            ('Kabupaten Bangka Selatan','BN','E'),
+            ('Kabupaten Belitung','BN','F'),
+            ('Kota Tanjung Pinang','BP','A, T'),
+            ('Kabupaten Bintan','BP','B'),
+            ('Kota Batam','BP','C, D, E, F, G, H, I, J, M, P, Q, R, Z'),
+            ('KabupatenKarimun','BP','K'),
+            ('Kabupaten Natuna','BP','N'),
+            ('Kabupaten Lingga','BP','O'),
+            ('KabupatenKepulauan Anambas','BP','S'),
             ('Kota Bandung','D','A, B, C, D, E, F, M, N, O, P, R, G, H, I, J, K, L'),
             ('Kota Cimahi','D','S, T'),
             ('Kabupaten Bandung Barat','D','U, X, Z'),
@@ -64,6 +231,28 @@ def INSET_DEFAULT_RECORDS():
             ('Kabupaten Sukabumi','F','Q, U, V'),
             ('Kota Sukabumi','F','S, T'),
             ('Kabupaten Cianjur','F','W, X, Y, Z'),
+            ('Kota Pekalongan','G','A, H, S'),
+            ('Kabupaten Pekalongan','G','B, K, O, T'),
+            ('Kabupaten Batang','G','C, L, V, X'),
+            ('Kabupaten Pemalang','G','D, I, M, W'),
+            ('Kota Tegal','G','E, N, Y'),
+            ('Kabupaten Tegal','G','F, P, Q, Z'),
+            ('Kabupaten Brebes','G','G, J, R, U'),
+            ('Kota Semarang','H','A, F, G, H, P, Q, R, S, W, X, Y, Z'),
+            ('Kota Salatiga','H','B, K, O, T'),
+            ('Kabupaten Semarang','H','C, I, L, V'),
+            ('KabupatenKendal','H','D, M, U'),
+            ('Kabupaten Demak','H','E, J, N'),
+            ('Kabupaten Pati','K','A, G, H, S, U'),
+            ('KabupatenKudus','K','B, K, O, R, T'),
+            ('Kabupaten Jepara','K','C, L, Q, V'),
+            ('Kabupaten Rembang','K','D, I, M, W'),
+            ('Kabupaten Blora','K','E, N, X, Y'),
+            ('Kabupaten Grobogan','K','F, J, P, Z'),
+            ('Kabupaten Banyumas','R','A, E, G, H, J, S, X'),
+            ('Kabupaten Cilacap','R','B, F, K, N, P, R, T'),
+            ('Kabupaten Purbalingga','R','C, L, Q, U, V, Z'),
+            ('Kabupaten Banjarnegara','R','C, L, Q, U, V, Z'),
             ('Kabupaten Purwakarta','T','A, B, C'),
             ('Kabupaten Karawang','T','D, E, F, G, H, O, P, Q, R, S, I, J, K, L, M, N'),
             ('Subang','T','T, U, V, W, X, Y, Z'),
@@ -76,11 +265,11 @@ def INSET_DEFAULT_RECORDS():
             ('Kota Banjar','Z','X, Y, Z');
       """
    )
-   CREATETABLE(dbname, tablename, sqlcommand)
+   CREATETABLE(dbname, sqlcommand)
 
 
 if __name__ == "__main__":
    # TODO Create table for the first time
    # CREATE_DEFAULT_TABLE()
-   # INSET_DEFAULT_RECORDS()
+   INSET_DEFAULT_RECORDS()
    pass
