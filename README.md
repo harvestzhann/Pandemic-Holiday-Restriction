@@ -2,6 +2,8 @@
 
 Restrictions on motorized vehicles between cities
 
+> [main.py](https://github.com/harvestzhann/Pandemic-holiday-restriction/blob/main/main/main.py)
+
 ## Aim
 
 On holiday, many vahicles moving between cities even country, especially on a long holidays.
